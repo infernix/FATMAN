@@ -1,0 +1,54 @@
+html {
+	background-color: #000000;
+	color: #FFFFFF;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+
+#header { 
+	border-bottom: 1px solid #AAAAAA;
+	color: #22FFFF;
+	
+}
+
+#clockin { 
+	border-bottom: 1px solid #AAAAAA;
+	color: #119911;
+	
+}
+
+#clockstate { 
+	border-bottom: 1px solid #AAAAAA;
+	color: #7351DD;
+	background-color: #111111;
+	
+}
+
+#cancelclockout { 
+	border-bottom: 1px solid #AAAAAA;
+	color: #C32323;
+	background-color: #111111;
+	
+}
+
+#clockingout { 
+	border-bottom: 1px solid #AAAAAA;
+	color: #119911;
+	
+}
+
+#clockedin {
+	border-bottom: 1px solid #AAAAAA;
+}
+
+#contactlist,#projectlist,#tasklist {
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+
+#logo {
+	float:right;
+	margin-right: 20px;	
+}
+form {
+	display: inline;
+}

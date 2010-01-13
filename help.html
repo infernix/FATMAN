@@ -1,0 +1,56 @@
+<h2>Welcome to FATMAN, the FreeAgent Time Manager!</h2>
+<h3>What's FATMAN?</h3>
+<p>FATMAN is a punch clock or attendance recorder for FreeAgentCentral.
+With it, you can clock your hours into tasks as you go, instead of having to fill in timesheets at the end of the day or week.</p>
+
+<p>To get started, fill in your FreeAgent company name and click Login. For example, if your FreeAgent URL is bobsbakery.freeagentcentral.com, just fill in 'bobsbakery'. You will then be prompted for your FreeAgent login and password for that company, which will be used to authenticate to the FreeAgent API. Once logged in, you should see your contacts, projects and tasks automatically!</p>
+
+<h3>Get started!</h3>
+<form action='' method='GET'>
+Your FreeAgent Company name:<input type='text' name='company' size='10'/>
+<input type='submit' value='Log in'/>
+</form>
+
+<h3>Tell me more!</h3>
+<p>FATMAN is written in PHP and is BSD-licensed. It stores data in local state files per user and per company. These state files contain start times, contact, project and task data. </p>
+
+<p>When not clocked in, it will query the FreeAgent API for your contacts, projects, tasks and recent timeslips. With this data, it presents an interface with which you can select recent tasks you've clocked in to, your contacts list, projects list and task list. It also allows for creation of new projects and tasks, and of course allows you to clock in to a task at a given time, or right now. When you do clock in, the state file is generated and stored on the webserver.</p>
+
+<p>When clocked in, it will read the state file and give you the option to cancel this clock in, clock out at a given time or clock out right now. When you clock out, the time between clock in and clock out is computed and submitted to FreeAgent through the API as a timeslip for the active task. Optionally you can configure FATMAN so that the start and end times are stored in the comment field for a timeslip.</p>
+
+<h3>What about security?</h3>
+<p>At the time of writing, the only way to authenticate to the FreeAgent API is by using your FreeAgent username and password. FATMAN therefore ask you for your FreeAgent company and credentials, and uses these to communicate securely with the API over HTTPS. </p>
+<p>FATMAN can be used in two ways:
+<ul>
+<li>By using HTTP Basic Authentication (default). Credentials are sent to FATMAN by your browser and are not stored anywhere, they are only briefly stored in the webservers memory while the FATMAN pages load.</li>
+<li>By preconfigured credentials in <i>config.inc.php</i>. Your credentials are stored on the webservers' disk where FATMAN is running. If you can trust that webserver, it will be secure. <b>You should provide other means of security yourself, such as .htaccess files.</b></li>
+</ul>
+</p>
+
+<p><b>When using HTTP Basic Authentication, FATMAN should be used over HTTPS.</b> If you use it over HTTP, your FreeAgent credentials are still submitted in plaintext over the internet, and if you are on a Wifi network, even over the air (hopefully your wifi is secure!). This might or might not be a problem for you, but you should at least be aware of it.</p>
+
+<h3>Feature list</h3>
+<ul>
+<li>Clock in and out of tasks - Done (v1.0)</li>
+<li>Create new projects - Done (v1.0)</li>
+<li>Create new tasks - Done (v1.0)</li>
+<li>Show recent tasks - Done (v1.0)</li>
+<li>Log start and end times in timeslip comments - Done (v1.0)</li>
+<li>Keep a local log of submitted timestamps - Planned</li>
+<li>Create contacts - Planned</li>
+<li>Create mileage entries - Planned</li>
+<li>Create a nicer interface - Hoping someone with design experience will fill this gap, I'm no GUI man :)</li>
+</ul>
+
+<h3>Settings</h3>
+<p>FATMAN keeps its settings in config.inc.php. The following settings can be configured:
+<ul>
+<li>Freeagent credentials - If you want to host FATMAN on your own webserver or locally, you can configure the company, fac_username and fac_password variables to skip the HTTP Basic authentication. See the notes in the security section.</li>
+<li>Currency - Set this to the displayed symbol for your currency (defaults to EUR)</li>
+<li>Recent task limit - Set this to the amount of recent tasks to show, keep this set to the bare minimum as it will slow page loads down (defaults to 10)</li>
+<li>Defaults for new projects - Set the billing basis (defaults to '1'), budget (defaults to '0') and the budget units (defaults to 'Hours') for newly created projects.</li>
+<li>Timeslip comments - Set to TRUE if you want to log the start time and end time in the timeslip comment field, e.g. 14:12-19:54</li>
+</ul>
+</p>
+<h3>Feedback</h3>
+<p>This project is hosted on github at <a href="http://github.com/infernix/FATMAN">http://github.com/infernix/FATMAN</a>. You can submit issues there, twitter me (infernix) or drop me an email at <a href="infernix@infernix.net">infernix@infernix.net</a>. I'd love to hear from you if you're using it!</p>
