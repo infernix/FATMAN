@@ -1,0 +1,7 @@
+Installation of FATMAN is pretty straightforward. You need:
+
+- A webserver with PHP 5 (PHP 4 not tested!)
+
+That's it!
+
+Create a new folder, upload it, optionally change the settings in config.inc.php and get started already!
