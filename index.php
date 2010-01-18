@@ -590,7 +590,7 @@ function do_clockin($clockintime) {
 		} else {
 			// Wrote statefile, lets output a div.
 			$content = "<div id='clockedin'>";
-			$content .= "Clocking in to task <b>$activetaskname</b> in project <b>$activeprojectname</b> for contact <b>$activecontactname</b>.<br />";
+			$content .= "Clocking in to task <b>".htmlspecialchars($activetaskname)."</b> in project <b>".htmlspecialchars($activeprojectname)."</b> for contact <b>".htmlspecialchars($activecontactname)."</b>.<br />";
 			$content .= "<ul><li>Clocked <b>in</b> at <b>".strftime("%a %d %b %H:%M:%S",$clockintime)."</b></li></ul>";
 			$content .= "Succesfully wrote state data.<br />";
 			$content .= "</div>";
@@ -1245,7 +1245,7 @@ function showheader() {
 
 	$content = "<div id='container'>";
 	$content .= "<div id='header'>";
-	$content .= "Welcome, $fullname! Time is: ".strftime("%b %d %H:%M:%S",time())."<br />";
+	$content .= "Welcome, ".htmlspecialchars($fullname)."! Time is: ".strftime("%b %d %H:%M:%S",time())."<br />";
 	$content .= "Lastlog @ FreeAgentCentral: ".strftime("%b %d %H:%M:%S",$lastlog)."<br />";
 	$content .= "</div>";
 
