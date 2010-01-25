@@ -812,10 +812,22 @@ function show_recent_tasks() {
 	$content .= "<form action='' method='POST'>\n";
 	$content .= "Recent:\n\n";
 	$content .= "<select name='recenttask' size='1' onchange='this.form.submit()'>\n";
-	
+
+	// We need to somehow sort or reverse the $timesliplist because it's sent by FAC in order oldest-newest.
+	foreach($timesliplist->timeslip as $timeslip) {
+		$timeslipsortedids[] = (integer)$timeslip->{'id'};
+	}
+	rsort($timeslipsortedids);
+ 
 	$recenttasklist = array();
 	$count = 0;
-	foreach ($timesliplist->timeslip as $timeslip) {
+
+	// these double loops are a bit ugly but it's because we can't sort a simplexml object in php.
+	// perhaps i should convert it to an array sooner, but oh well.
+	foreach ($timeslipsortedids as $timeslipid) {
+	 foreach ($timesliplist->timeslip as $timeslip) {
+ 	  $currenttimeslipid = (integer)$timeslip->{'id'};
+	  if($currenttimeslipid == $timeslipid) {	
 		$recenttask = (integer)$timeslip->{'task-id'};
 		// Check to make sure we don't do this more than once per task-id
 		if(!isset($recenttasklist[$recenttask]) && $count < $recenttasklimit) { 
@@ -865,6 +877,8 @@ function show_recent_tasks() {
 			
 			$count = $count + 1;
 		}
+	  }
+	 }
 	}
 	$content .= "</select>\n";
 	$content .= "<input type='hidden' name='pageaction' value='RecentTask'/>\n";
